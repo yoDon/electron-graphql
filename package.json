@@ -1,0 +1,106 @@
+{
+  "name": "electron-graphql",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "./",
+  "main": "buildMain/index.js",
+  "scripts": {
+    "lint": "npm run main-lint && npm run react-lint",
+    "start": "concurrently \"npm run react-start\" \"npm run main-start\"",
+    "watch": "concurrently \"npm run main-watch\" \"npm run react-watch\"",
+    "build": "npm run react-build && npm run main-build",
+    "main-lint": "tslint -c tslint.json -p tsconfig.electronMain.json",
+    "main-start": "tsc -p tsconfig.electronMain.json && wait-on http://localhost:3000/ && cross-env NODE_ENV=development electron .",
+    "main-watch": "tsc -w -p tsconfig.electronMain.json",
+    "main-build": "tsc -p tsconfig.electronMain.json && electron-builder",
+    "react-lint": "tslint -c tslint.json -p tsconfig.json",
+    "react-start": "craco start",
+    "react-watch": "tsc -w -p tsconfig.json",
+    "react-build": "craco build"
+  },
+  "dependencies": {
+    "@craco/craco": "^3.5.0",
+    "@types/cors": "^2.8.4",
+    "@types/express": "^4.16.1",
+    "@types/express-graphql": "^0.6.2",
+    "@types/isomorphic-fetch": "0.0.35",
+    "@types/node": "^11.11.3",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.2",
+    "@types/uuid": "^3.4.4",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link-http": "^1.5.14",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-graphql": "^0.8.0",
+    "get-port": "^4.2.0",
+    "graphql": "^14.2.0",
+    "graphql-tag": "^2.10.1",
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-scripts": "2.1.8",
+    "shx": "^0.3.2",
+    "typescript": "^3.3.3333",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "electron": "4.1.0",
+    "electron-builder": "^20.39.0",
+    "source-map-support": "^0.5.11",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "tslint-loader": "^3.5.3",
+    "tslint-react": "^3.4.0",
+    "wait-on": "^3.2.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "build": {
+    "appId": "com.example.electron-graphql",
+    "productName": "My Electron GraphQL App",
+    "forceCodeSigning": false,
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "extraMetadata": {
+      "main": "buildMain/index.js"
+    },
+    "files": [],
+    "extraResources": [],
+    "extraFiles": [],
+    "mac": {
+      "files": [
+        "node_modules/**",
+        "buildMain/**"
+      ],
+      "target": "dmg"
+    },
+    "mas": {},
+    "dmg": {},
+    "pkg": {},
+    "win": {
+      "files": [
+        "node_modules/**",
+        "buildMain/**"
+      ],
+      "target": "nsis"
+    },
+    "nsis": {},
+    "nsisWeb": {},
+    "portable": {},
+    "appx": {},
+    "squirrelWindows": {}
+  }
+}
