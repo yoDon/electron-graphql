@@ -1,10 +1,11 @@
 import cors from "cors";
-import { ipcMain } from "electron"; // tslint:disable-line
+import { dialog, ipcMain, BrowserWindow } from "electron"; // tslint:disable-line
 import express from "express";
 import express_graphql from "express-graphql";
 import getPort from "get-port";
 import { buildSchema } from "graphql";
 import uuid from "uuid";
+import { calc } from "./calc";
 
 const isDev = (process.env.NODE_ENV === "development");
 
@@ -32,7 +33,17 @@ const root = {
     if (args.signingkey !== apiDetails.signingKey) {
       return "invalid signature";
     }
-    return args.math;
+    const result = calc(args.math);
+    dialog.showMessageBox(
+      null as unknown as BrowserWindow,
+      {
+        buttons:["OK"],
+        detail:(args.math + " = " + result),
+        message:"Full access to electron api available",
+        title:"Main process",
+      },
+      () => console.log(result));
+    return result;
   },
   hello: (args:{ signingkey:string }) => {
     if (args.signingkey !== apiDetails.signingKey) {
