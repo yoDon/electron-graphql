@@ -29,7 +29,3 @@ npm run build
 # Debugging the GraphQL server
 
 To test the GraphQL server, run `npm run start`, then browse to `http://127.0.0.1:5000/graphiql/` to access a GraphiQL view of the server. For a more detailed example, try `http://127.0.0.1:5000/graphiql/?query={calc(math:"1/2",signingkey:"devkey")}` which works great if you copy and paste into the browser but which is a complex enough URL that it will confuse chrome if you try to click directly on it.
-
-# Notes
-
-The electron renderer process communicates with the main process via GraphQL web service calls.
