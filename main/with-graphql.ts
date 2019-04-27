@@ -1,5 +1,5 @@
 import cors from "cors";
-import { dialog, ipcMain, BrowserWindow } from "electron"; // tslint:disable-line
+import Electron, { dialog, ipcMain, BrowserWindow } from "electron"; // tslint:disable-line
 import express from "express";
 import express_graphql from "express-graphql";
 import getPort from "get-port";
