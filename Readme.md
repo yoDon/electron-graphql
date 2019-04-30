@@ -1,4 +1,8 @@
-# Electron + Create-React-App + GraphQL
+# Electron + GraphQL
+
+This sample shows how to use GraphQL as the interprocess channel in Electron apps. The stock IPC communications channels are still there under the hood and are used to do the handshaking to set up an authenticated GraphQL connection, but if you're building the rest of your system on GraphQL based APIs the goal is to not have to maintain yet another antiquated string-based API structure for communications within Electron. The Electron main (backend) process spawns an express GraphQL webserver and provides a randomly generated authentication token to both the webserver and the Electron renderer (frontend) process for use in authenticating messages sent between the frontend and the webserver. 
+
+The webserver currently exposes a GraphQL endpoint for the frontend to interact with but the backend is just a plain old express server so you can tweak it to host whatever sort of REST or similar web services as might be needed by your application. The React frontend part of the sample is similarly based on a stock create-react-app site, so it should be easy to customize as needed. The only significant embelishments to the stock cra app are (1) the bare minimal amount of https://github.com/sharegate/craco to support hooking into electron without needing to eject the create react app and (2) typescript support, which you don't have to use but I personally can't imagine building a serious javascript project without it so it's there if you need it.
 
 This example builds a stand-alone Electron application that uses GraphQL for interprocess communication rather than IPC. On Windows it builds the app into `./dist/win-unpacked/My Electron GraphQL App.exe` and the optional installer into `./dist/My Electron GraphQL App Setup 1.0.0.exe` (OSX and Linux destinations are similar). You can change the name of the application by changing the `name` property in `package.json`.
 
